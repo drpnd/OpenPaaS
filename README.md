@@ -7,11 +7,11 @@ Hirochika Asai
 
 ### httplb: HTTP load balancer
 - Dependencies
--- nginx
+ - nginx
 
 ### instances: Instances
 
 ### repos: Repository server
 - Dependencies
--- Ruby (Rails)
--- gitolite
+ - Ruby (Rails)
+ - gitolite
