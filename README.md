@@ -1,5 +1,8 @@
 # Open PaaS
 
+This project was originaly for a PBL lecture course (B2) in 2014
+about cloud computing at the University of Tokyo.
+
 ## Developer
 Hirochika Asai
 
