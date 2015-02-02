@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: oplat_production
-  username: oplat
+  username: root
   password: <%= ENV['OPLAT_DATABASE_PASSWORD'] %>

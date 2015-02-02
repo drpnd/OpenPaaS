@@ -53,4 +53,10 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+
+  ## Regular route
+  root 'account#default'
+  #post 'adaptive' => 'image_processing#adaptive'
+  #post 'facerecog' => 'image_processing#facerecog'
 end
