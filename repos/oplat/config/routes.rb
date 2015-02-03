@@ -60,7 +60,9 @@ Rails.application.routes.draw do
 
 
   ## Regular route
-  root 'account#default'
+  root 'static_page#default'
+  match '/help', to: 'static_page#help', via: 'get'
+  #match '/signin',  to: 'users#new',            via: 'get'
   #post 'adaptive' => 'image_processing#adaptive'
   #post 'facerecog' => 'image_processing#facerecog'
 end
