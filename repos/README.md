@@ -4,7 +4,7 @@
 
 Create an administrator account
 
-# useradd -m admin -s /bin/bash
+    # useradd -m admin -s /bin/bash
 
 Switch the user and create an SSH key pair
 
