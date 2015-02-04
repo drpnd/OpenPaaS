@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  resources :sessions
   resources :repositories
-
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -61,9 +61,10 @@ Rails.application.routes.draw do
 
   ## Regular route
   root 'static_pages#default'
-  match '/help', to: 'static_pages#help', via: 'get'
-  match '/signup',  to: 'users#new',            via: 'get'
-  #match '/signin',  to: 'users#new',            via: 'get'
+  match '/help',        to: 'static_pages#help',        via: 'get'
+  match '/signup',      to: 'users#new',                via: 'get'
+  match '/signin',      to: 'sessions#new',             via: 'get'
+  match '/signout',     to: 'sessions#destroy',         via: 'delete'
   #post 'adaptive' => 'image_processing#adaptive'
   #post 'facerecog' => 'image_processing#facerecog'
 end

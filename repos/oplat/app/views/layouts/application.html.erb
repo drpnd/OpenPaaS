@@ -19,7 +19,7 @@
           <ul class="nav pull-right">
             <li><%= link_to "Home",    root_path %></li>
             <li><%= link_to "Help",    help_path %></li>
-            <li><%= link_to "Sign in", '#' %></li>
+            <li><% if signed_in? %><%= link_to "Sign out", signout_path, method: "delete" %><% else %><%= link_to "Sign in", signin_path %><% end %></li>
           </ul>
         </nav>
       </div>
@@ -28,6 +28,10 @@
 
 	<hr />
 	<div class="container">
+		<% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+
 		<%= yield %>
 
 		<%= render 'layouts/footer' %>
