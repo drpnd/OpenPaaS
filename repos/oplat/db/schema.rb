@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204064012) do
+ActiveRecord::Schema.define(version: 20150204082714) do
 
   create_table "repositories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20150204064012) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "repositories", ["user_id", "name"], name: "index_repositories_on_user_id_and_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",            limit: 255
