@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :repositories
 
-  before_save { self.name = email.downcase }
+  before_save { self.name = name.downcase }
   before_save { self.email = email.downcase }
 
   validates :name, presence: true, length: { minimum: 5, maximum: 40 },
