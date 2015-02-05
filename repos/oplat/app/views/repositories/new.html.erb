@@ -1,5 +1,17 @@
-<h1>New Repository</h1>
+<% provide(:title, 'Create repository') %>
 
-<%= render 'form' %>
+<h1>Create repository</h1>
 
-<%= link_to 'Back', repositories_path %>
+<div class="row">
+
+  <div class="span6 offset3">
+		<%= form_for(@repository) do |f| %>
+
+		<%= render 'shared/error_messages', object: f.object %>
+		<div class="field">
+			<%= f.text_field :name, placeholder: "Create new repository..." %>
+		</div>
+		<%= f.submit "Create", class: "btn btn-large btn-primary" %>
+    <% end %>
+	</div>
+</div>

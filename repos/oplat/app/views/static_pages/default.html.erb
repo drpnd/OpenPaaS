@@ -5,11 +5,19 @@
   <h2>This is the home page for the Open PaaS application.</h2>
 
 
-	<%= form_for(@repositories) do |f| %>
-  <div class="field">
-    <%= f.text_field :name, placeholder: "Create new repository..." %>
+	<% if signed_in? %>
+	<div class="row">
+    <% if @current_user.repositories.any? %>
+      <h3>Repositories (<%= @current_user.repositories.size %>)</h3>
+      <ol class="repositories">
+				<% @current_user.repositories.each do |repository| %>
+        <li><%= repository.name %></li>
+				<% end %>
+      </ol>
+			<% end %>
+			<%= link_to "Create new repository", new_repository_path, class: "btn btn-large" %>
   </div>
-  <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+
 	<% end %>
 
   <!--<%= link_to "Sign up now!", '#', class: "btn btn-large btn-primary" %>-->

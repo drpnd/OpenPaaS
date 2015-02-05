@@ -14,9 +14,9 @@ class RepositoriesController < ApplicationController
   # end
 
   # # GET /repositories/new
-  # def new
-  #   @repository = Repository.new
-  # end
+  def new
+    @repository = current_user.repositories.build
+  end
 
   # # GET /repositories/1/edit
   # def edit
@@ -27,11 +27,15 @@ class RepositoriesController < ApplicationController
   def create
     @repository = current_user.repositories.build(repository_params)
     if @repository.save
-      flash[:success] = "Repository was successfully created."
+        flash[:success] = "Repository was successfully created."
       redirect_to root_url
     else
-      flash[:error] = "Failed."
-      redirect_to root_url
+      respond_to do |format|
+        flash[:error] = "Failed."
+        format.html { render :new }
+        format.json { render json: @repository.errors, status: :unprocessable_entity }
+        # redirect_to root_url
+      end
     end
 
     # @repository = Repository.new(repository_params)
