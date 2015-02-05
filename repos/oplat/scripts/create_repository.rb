@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'mysql2'
 
 if ARGV.size < 4
@@ -12,7 +14,7 @@ db_net = ARGV[3]
 user_repos = c.escape("#{user}_#{repository}")
 
 
-
+# `/home/gitadmin/gitolite-admin`
 
 
 ## DATABASE

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :users,             only: [:new, :create]
   resources :sessions,          only: [:new, :create, :destroy]
   resources :repositories,      only: [:new, :create]
+  resources :user_keys
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -67,4 +68,6 @@ Rails.application.routes.draw do
   match '/signout',     to: 'sessions#destroy',         via: 'delete'
   #post 'adaptive' => 'image_processing#adaptive'
   #post 'facerecog' => 'image_processing#facerecog'
+
+  #p Shellwords.escape(";lag")
 end
