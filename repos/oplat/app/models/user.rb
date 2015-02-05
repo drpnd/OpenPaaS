@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :repositories
+  has_many :repositories, dependent: :destroy
 
   before_save { self.name = name.downcase }
   before_save { self.email = email.downcase }

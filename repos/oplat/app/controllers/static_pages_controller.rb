@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
 
   ## Front page
   def default
-    render "static_pages/default"
+    @repositories = current_user.repositories.build if signed_in?
   end
 
   def help
