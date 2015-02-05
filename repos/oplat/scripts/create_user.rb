@@ -20,6 +20,8 @@ end
 # Working directory
 wd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
 
+FileUtils.cd(wd)
+
 if File.exist?(lockfile)
   $stderr.puts "File is locked"
   exit 1
@@ -27,8 +29,6 @@ end
 
 # Lock
 FileUtils.touch(lockfile)
-
-FileUtils.cd(wd)
 
 if File.exist?("keydir/#{username}.pub")
   $stderr.puts "User already exists"
