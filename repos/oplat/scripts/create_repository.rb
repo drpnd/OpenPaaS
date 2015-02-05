@@ -2,6 +2,7 @@ require 'mysql2'
 
 if ARGV.size < 4
   $stderr.puts "#{$0} user repository password net"
+  exit 1
 end
 
 user = ARGV[0]
@@ -24,3 +25,4 @@ c.query("set character set utf8")
 c.query("grant all privileges on `#{user_repos}`.* to '#{user_repos}'@'#{db_net}' identified by '#{db_password}'")
 c.close
 
+exit 0
