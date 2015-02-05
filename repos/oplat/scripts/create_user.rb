@@ -19,6 +19,7 @@ end
 
 # Working directory
 wd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
+ENV['HOME'] = ENV['OPLAT_OPLAT_GITOLITE_HOME']
 
 FileUtils.cd(wd)
 
