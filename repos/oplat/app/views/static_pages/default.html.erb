@@ -23,9 +23,11 @@
 			<%= link_to "Create new repository", new_repository_path, class: "btn btn-large" %>
   </div>
 
+	<% else %>
+	<div class="row">
+		<%= link_to "Sign up now!", signup_path, class: "btn btn-large" %>
+	</div>
 	<% end %>
-
-  <!--<%= link_to "Sign up now!", '#', class: "btn btn-large btn-primary" %>-->
 
 </div>
 
