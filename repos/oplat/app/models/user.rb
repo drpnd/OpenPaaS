@@ -29,6 +29,6 @@ class User < ActiveRecord::Base
   end
 
   def create_user
-    `sudo #{Rails.root}/scripts/create_user.rb #{rname.shellescape}`
+    `sudo #{Rails.root}/scripts/create_user.rb #{name.shellescape}`
   end
 end
