@@ -33,6 +33,7 @@ FileUtils.cd(wd)
 
 unless File.exist?("keydir/#{username}.pub")
   $stderr.puts "User not found"
+  FileUtils.rm(lockfile)
   exit 1
 end
 ile.write("keydir/#{username}.pub", sshpubkey)

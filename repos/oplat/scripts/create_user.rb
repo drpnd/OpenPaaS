@@ -32,6 +32,7 @@ FileUtils.cd(wd)
 
 if File.exist?("keydir/#{username}.pub")
   $stderr.puts "User already exists"
+  FileUtils.rm(lockfile)
   exit 1
 end
 FileUtils.touch("keydir/#{username}.pub")
