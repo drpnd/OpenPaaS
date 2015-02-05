@@ -21,7 +21,7 @@ end
 # Working directory
 wd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
 
-unless File.exist?(lockfile)
+if File.exist?(lockfile)
   $stderr.puts "File is locked"
   exit 1
 end
