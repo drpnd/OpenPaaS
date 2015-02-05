@@ -25,12 +25,13 @@ class RepositoriesController < ApplicationController
   # POST /repositories
   # POST /repositories.json
   def create
-    @repository = current_user.repositories.build(micropost_params)
-    if @micropost.save
+    @repository = current_user.repositories.build(repository_params)
+    if @repository.save
       flash[:success] = "Repository was successfully created."
       redirect_to root_url
     else
-      render 'static_pages/default'
+      flash[:error] = "Failed."
+      redirect_to root_url
     end
 
     # @repository = Repository.new(repository_params)

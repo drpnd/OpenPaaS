@@ -2,9 +2,15 @@
 <div class="center hero-unit">
   <h1>Welcome to the Open PaaS</h1>
 
-  <h2>
-    This is the home page for the Open PaaS application.
-  </h2>
+  <h2>This is the home page for the Open PaaS application.</h2>
+
+
+	<%= form_for(@repositories) do |f| %>
+  <div class="field">
+    <%= f.text_field :name, placeholder: "Create new repository..." %>
+  </div>
+  <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+	<% end %>
 
   <!--<%= link_to "Sign up now!", '#', class: "btn btn-large btn-primary" %>-->
 
