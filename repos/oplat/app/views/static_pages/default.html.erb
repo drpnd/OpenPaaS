@@ -1,14 +1,19 @@
 <% provide(:title, 'Home') %>
 <div class="center hero-unit">
-  <h1>Welcome to the Open PaaS</h1>
 
-  <h2>This is the home page for the Open PaaS application.</h2>
+	<% if signed_in? %>
+	<h1>Open PaaS</h1>
+  <h2>Hi, <%= @current_user.name %>!</h2>
+	<% else %>
+	<h1>Welcome to the Open PaaS</h1>
+	<h2>This is the home page for the Open PaaS application.</h2>
+	<% end %>
 
 
 	<% if signed_in? %>
 	<div class="row">
     <% if @current_user.repositories.any? %>
-      <h3>Repositories (<%= @current_user.repositories.size %>)</h3>
+      <h3>Your repositories (<%= @current_user.repositories.size %>)</h3>
       <ol class="repositories">
 				<% @current_user.repositories.each do |repository| %>
         <li><%= repository.name %></li>
