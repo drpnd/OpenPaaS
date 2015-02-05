@@ -8,12 +8,22 @@ class Repository < ActiveRecord::Base
   validates :user_id, presence: true
   default_scope -> { order('created_at DESC') }
 
+  before_create {|repository|
+    repository.secret_token = SecureRandom.hex(64)
+    repository.db_password = SecureRandom.base64(15)}
+
+  before_create :create_repository
 
   def user_repository_uniqueness
     existing_record = Repository.find(:first, :conditions => ["user_id = ? AND name = ?", user_id, name])
     unless existing_record.blank?
       errors.add(:user_id, "has already been saved for this relationship")
     end
+  end
+
+  private
+  def create_repository
+    # ``
   end
 
 end

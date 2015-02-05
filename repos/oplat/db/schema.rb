@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205203537) do
+ActiveRecord::Schema.define(version: 20150205212933) do
 
   create_table "repositories", force: :cascade do |t|
-    t.string   "name",            limit: 255
-    t.integer  "user_id",         limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.string   "password_digest", limit: 255
+    t.string   "name",         limit: 255
+    t.integer  "user_id",      limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "db_password",  limit: 255
+    t.string   "secret_token", limit: 255
   end
 
   add_index "repositories", ["user_id", "name"], name: "index_repositories_on_user_id_and_name", using: :btree

@@ -9,7 +9,9 @@
 
 		<%= render 'shared/error_messages', object: f.object %>
 		<div class="field">
+			<%= f.label :name, "Repository name" %>
 			<%= f.text_field :name, placeholder: "Create new repository..." %>
+
 		</div>
 		<%= f.submit "Create", class: "btn btn-large btn-primary" %>
     <% end %>

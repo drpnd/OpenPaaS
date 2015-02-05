@@ -16,7 +16,13 @@
       <h3>Your repositories (<%= @current_user.repositories.size %>)</h3>
       <ol class="repositories">
 				<% @current_user.repositories.each do |repository| %>
-        <li><%= repository.name %></li>
+        <li><%= repository.name %>
+					<% if false %>
+					<br />
+					Secret token: <textarea readonly="readonly"><%= repository.secret_token %></textarea>
+					Database password: <textarea readonly="readonly"><%= repository.password_digest %></textarea>
+					<% end %>
+				</li>
 				<% end %>
       </ol>
 			<% end %>
@@ -34,7 +40,6 @@
 
       <%= f.label :password %>
       <%= f.password_field :password %>
-
 
       <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
 			<%= link_to "Sign up now!", signup_path, class: "btn btn-large" %>
