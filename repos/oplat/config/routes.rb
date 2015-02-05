@@ -68,6 +68,4 @@ Rails.application.routes.draw do
   match '/signout',     to: 'sessions#destroy',         via: 'delete'
   #post 'adaptive' => 'image_processing#adaptive'
   #post 'facerecog' => 'image_processing#facerecog'
-
-  #p Shellwords.escape(";lag")
 end

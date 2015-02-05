@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
   end
 
   def create_user
-    `sudo #{Rails.root}/scripts/create_user.rb #{name.shellescape}`
+    cmd = "sudo #{Rails.root}/scripts/create_user.rb #{name.shellescape}"
+    if exec( cmd )
+      return false
+    end
   end
 end
