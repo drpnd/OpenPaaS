@@ -24,8 +24,24 @@
   </div>
 
 	<% else %>
+
+  <div class="span6">
+
+    <%= form_for(:session, url: sessions_path) do |f| %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+
+      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+			<%= link_to "Sign up now!", signup_path, class: "btn btn-large" %>
+    <% end %>
+	</div>
+
 	<div class="row">
-		<%= link_to "Sign up now!", signup_path, class: "btn btn-large" %>
 	</div>
 	<% end %>
 
