@@ -29,39 +29,6 @@ class User < ActiveRecord::Base
   end
 
   def create_user
-    username = name
-    lockfile = '/tmp/oplat.lock'
-    # Check the argument
-    if username.empty?
-      $stderr.puts "Empty username"
-      return false
-    end
-
-    # Working directory
-    wd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
-    ENV['HOME'] = ENV['OPLAT_OPLAT_GITOLITE_HOME']
-
-    FileUtils.cd(wd)
-
-    if File.exist?(lockfile)
-      $stderr.puts "File is locked"
-      return false
-    end
-
-    # Lock
-    FileUtils.touch(lockfile)
-
-    if File.exist?("keydir/#{username}.pub")
-      $stderr.puts "User already exists"
-      FileUtils.rm(lockfile)
-      return false
-    end
-    FileUtils.touch("keydir/#{username}.pub")
-    `git add keydir/#{username.shellescape}.pub`
-    `git commit -m "add #{username.shellescape}" keydir/#{username.shellescape}.pub`
-    `git push`
-
-    # Unlock
-    FileUtils.rm(lockfile)
+    `sudo #{Rails.root}/scripts/create_user.rb #{rname.shellescape}`
   end
 end
