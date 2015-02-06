@@ -6,14 +6,13 @@
 
   <div class="span6 offset3">
 
-    <%= form_for(:user_keys, url: user_keys_path) do |f| %>
+		<%= form_tag(user_keys_path, method: "post") do %>
+		<%= label_tag(:key, "Name:") %>
+		<%= text_area_tag(:key, @key) %>
 
-      <%= f.label :key %>
-      <%= f.text_area :key %>
+		<hr />
 
-			<hr />
-
-      <%= f.submit "Update", class: "btn btn-large btn-primary" %>
+    <%= submit_tag("Update", class: "btn btn-large btn-primary") %>
     <% end %>
 
 	</div>

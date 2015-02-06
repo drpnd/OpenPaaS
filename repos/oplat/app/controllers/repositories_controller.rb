@@ -16,6 +16,8 @@ class RepositoriesController < ApplicationController
   # # GET /repositories/new
   def new
     @repository = current_user.repositories.build
+    p @repository
+    @repository
   end
 
   # # GET /repositories/1/edit
