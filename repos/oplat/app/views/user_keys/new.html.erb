@@ -1,0 +1,20 @@
+<% provide(:title, 'Update SSH public key') %>
+
+<h1>Update SSH public key</h1>
+
+<div class="row">
+
+  <div class="span6 offset3">
+
+    <%= form_for(:user_keys, url: user_keys_path) do |f| %>
+
+      <%= f.label :key %>
+      <%= f.text_area :key %>
+
+			<hr />
+
+      <%= f.submit "Update", class: "btn btn-large btn-primary" %>
+    <% end %>
+
+	</div>
+</div>
