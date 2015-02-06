@@ -54,7 +54,7 @@ system("git commit -m \"update.\" -a")
 system("git push")
 
 
-cd = File.dir(__FILE__)
+cd = File.dirname(__FILE__)
 
 str = "#!/bin/sh
 ## Username/Repository
