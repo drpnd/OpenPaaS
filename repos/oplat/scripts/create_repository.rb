@@ -54,11 +54,13 @@ system("git commit -m \"update.\" -a")
 system("git push")
 
 
+cd = File.dir(__FILE__)
+
 str = "#!/bin/sh
 ## Username/Repository
 REPOSITORY=\"#{username}/#{repository}\"
 "
-str0 = File.read("#{Rails.root}/scripts/rails_git_post_update_hook.sh")
+str0 = File.read("#{cd}/rails_git_post_update_hook.sh")
 
 File.write("#{rd}/#{username}/#{repository}.git/hooks/post-update", str + str0)
 
