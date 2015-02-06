@@ -44,7 +44,7 @@ admin = ENV['OPLAT_GITOLITE_USER']
 # New configuration
 str = File.read("#{wd}/conf/gitolite.conf")
 str = str + "
-repo    #{username}/#{repos}
+repo    #{username}/#{repository}
         RW+     =   #{admin}
         RW      =   #{username}
         R       =   ins"
@@ -56,14 +56,14 @@ system("git push")
 
 str = "#!/bin/sh
 ## Username/Repository
-REPOSITORY=\"#{username}/#{repos}\"
+REPOSITORY=\"#{username}/#{repository}\"
 "
 str0 = File.read("#{Rails.root}/scripts/rails_git_post_update_hook.sh")
 
-File.write("#{rd}/#{username}/#{repos}.git/hook/post-update", str + str0)
+File.write("#{rd}/#{username}/#{repository}.git/hook/post-update", str + str0)
 
-system("chmod +x #{rd}/#{username}/#{repos}.git/hooks/post-update")
-system("chown git #{rd}/#{username}/#{repos}.git/hooks/post-update")
+system("chmod +x #{rd}/#{username}/#{repository}.git/hooks/post-update")
+system("chown git #{rd}/#{username}/#{repository}.git/hooks/post-update")
 
 # Unlock
 FileUtils.rm(lockfile)
