@@ -60,7 +60,7 @@ REPOSITORY=\"#{username}/#{repository}\"
 "
 str0 = File.read("#{Rails.root}/scripts/rails_git_post_update_hook.sh")
 
-File.write("#{rd}/#{username}/#{repository}.git/hook/post-update", str + str0)
+File.write("#{rd}/#{username}/#{repository}.git/hooks/post-update", str + str0)
 
 system("chmod +x #{rd}/#{username}/#{repository}.git/hooks/post-update")
 system("chown git #{rd}/#{username}/#{repository}.git/hooks/post-update")
