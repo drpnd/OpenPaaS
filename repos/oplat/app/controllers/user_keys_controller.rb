@@ -3,13 +3,13 @@ class UserKeysController < ApplicationController
   before_action :signed_in_user, only: [:new, :update]
 
   def new
-    wd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
+    wd = ENV['OPLAT_GITOLITE_REPOSITORY']
     @key = File.read("#{wd}/keydir/#{current_user.name}.pub")
   end
 
   def create
     key = params[:key]
-    cmd = "sudo -u '#{ENV['OPLAT_OPLAT_GITOLITE_USER'].shellescape}' #{Rails.root}/scripts/update_user.rb #{current_user.name.shellescape} #{key.shellescape}"
+    cmd = "sudo -u '#{ENV['OPLAT_GITOLITE_USER'].shellescape}' #{Rails.root}/scripts/update_user.rb #{current_user.name.shellescape} #{key.shellescape}"
     r = system( cmd )
     logger.info r
     if r
