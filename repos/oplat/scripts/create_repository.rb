@@ -65,7 +65,8 @@ c = Mysql2::Client.new(:host => ENV['OPLAT_EXT_DATABASE_HOST'],
 
 c.query("set character set utf8")
 c.query("create database `#{user_repos}` default charset utf8 collate utf8_general_ci")
-c.query("grant all privileges on `#{user_repos}`.* to '#{user_repos}'@'#{db_net}' identified by '#{db_password}'")
+c.query("create user '#{user_repos}'@'#{db_net}' identified by '#{db_password}'")
+c.query("grant all on `#{user_repos}`.* to '#{user_repos}'@'#{db_net}'")
 c.close
 
 exit 0
