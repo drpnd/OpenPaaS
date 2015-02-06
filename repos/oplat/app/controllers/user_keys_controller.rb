@@ -11,6 +11,7 @@ class UserKeysController < ApplicationController
     key = params[:key]
     cmd = "sudo -u '#{ENV['OPLAT_OPLAT_GITOLITE_USER'].shellescape}' #{Rails.root}/scripts/update_user.rb #{current_user.name.shellescape} #{key.shellescape}"
     r = system( cmd )
+    logger.info r
     if r
       flash[:success] = "Updated the SSH key!"
       redirect_to root_url

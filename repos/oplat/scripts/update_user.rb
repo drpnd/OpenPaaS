@@ -20,6 +20,7 @@ end
 
 # Working directory
 wd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
+ENV['HOME'] = ENV['OPLAT_OPLAT_GITOLITE_HOME']
 
 FileUtils.cd(wd)
 
@@ -36,9 +37,22 @@ unless File.exist?("keydir/#{username}.pub")
   FileUtils.rm(lockfile)
   exit 1
 end
-File.write("keydir/#{username}.pub", sshpubkey)
+begin
+  file = File.open("keydir/#{username}.pub", 'w')
+  file.write(sshpubkey)
+rescue IOError => e
+ensure
+  file.close unless file == nil
+end
+#File.write("keydir/#{username}.pub", sshpubkey)
 system("git commit -m \"update #{username.shellescape}.\" keydir/#{username.shellescape}.pub")
-system("git push")
+r = system("git push")
 
 # Unlock
 FileUtils.rm(lockfile)
+
+if r
+  exit 0
+else
+  exit 1
+end
