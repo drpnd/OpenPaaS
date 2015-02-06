@@ -38,7 +38,7 @@ if File.exist?("keydir/#{username}.pub")
 end
 FileUtils.touch("keydir/#{username}.pub")
 system("git add keydir/#{username.shellescape}.pub")
-system("git commit -m \"add #{username.shellescape}\" keydir/#{username.shellescape}.pub")
+system("git commit -m \"add #{username.shellescape}.\" keydir/#{username.shellescape}.pub")
 system("git push")
 
 # Unlock

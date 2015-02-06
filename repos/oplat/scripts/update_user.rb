@@ -36,9 +36,9 @@ unless File.exist?("keydir/#{username}.pub")
   FileUtils.rm(lockfile)
   exit 1
 end
-ile.write("keydir/#{username}.pub", sshpubkey)
-`git commit -m "update #{username.shellescape}" keydir/#{username.shellescape}.pub`
-`git push`
+File.write("keydir/#{username}.pub", sshpubkey)
+system("git commit -m \"update #{username.shellescape}.\" keydir/#{username.shellescape}.pub")
+system("git push")
 
 # Unlock
 FileUtils.rm(lockfile)
