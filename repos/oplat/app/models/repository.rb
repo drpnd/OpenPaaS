@@ -30,6 +30,7 @@ class Repository < ActiveRecord::Base
     cmd = "sudo -u 'git' #{Rails.root}/scripts/create_repository_addhook.rb #{user.name.shellescape} #{name.shellescape}"
     logger.info cmd
     system( cmd )
+    return true
   end
 
 end
