@@ -13,7 +13,7 @@ username = ARGV[0]
 repository = ARGV[1]
 db_password = ARGV[2]
 db_net = ARGV[3]
-user_repos = c.escape("#{username}_#{repository}")
+user_repos = Shellwords.escape("#{username}_#{repository}")
 
 # Check the argument
 if username.empty?
