@@ -1,20 +1,74 @@
 #!/usr/bin/env ruby
 
 require 'mysql2'
+require 'fileutils'
+require 'shellwords'
 
 if ARGV.size < 4
   $stderr.puts "#{$0} user repository password net"
   exit 1
 end
 
-user = ARGV[0]
+username = ARGV[0]
 repository = ARGV[1]
 db_password = ARGV[2]
 db_net = ARGV[3]
-user_repos = c.escape("#{user}_#{repository}")
+user_repos = c.escape("#{username}_#{repository}")
+
+# Check the argument
+if username.empty?
+  $stderr.puts "Empty username"
+  exit 1
+end
+
+lockfile = '/tmp/oplat.lock'
+
+# Working directory
+wd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
+ENV['HOME'] = ENV['OPLAT_OPLAT_GITOLITE_HOME']
+
+FileUtils.cd(wd)
+
+if File.exist?(lockfile)
+  $stderr.puts "File is locked"
+  exit 1
+end
+
+# Lock
+FileUtils.touch(lockfile)
+
+#
+rd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
+admin = ENV['OPLAT_OPLAT_GITOLITE_USER']
+
+FileUtils.mkdir_p("#{rd}/#{user_repos}")
+
+# New configuration
+str = File.read("#{wd}/conf/gitolite.conf")
+str = str + "
+repo    $user_repos
+        RW+     =   #{admin}
+        RW      =   $username
+        R       =   instance"
+File.write("#{wd}/conf/gitolite.conf", str)
+
+system("git commit -m \"update.\" -a")
+system("git push")
 
 
-# `/home/gitadmin/gitolite-admin`
+str = "#!/bin/sh
+## Username/Repository
+REPOSITORY=\"$user_repos\"
+"
+str0 = File.read("#{Rails.root}/scripts/rails_git_post_update_hook.sh")
+
+File.write("#{rd}/#{user_repos}.git/hook/post-update", str + str0)
+
+system("chmod +x $rd/$user_repos.git/hooks/post-update")
+system("chown git $rd/$user_repos.git/hooks/post-update")
+
+# Unlock
+FileUtils.rm(lockfile)
 
 
 ## DATABASE
