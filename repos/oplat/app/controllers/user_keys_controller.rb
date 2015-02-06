@@ -5,13 +5,20 @@ class UserKeysController < ApplicationController
   def new
     wd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
     key = File.read("#{wd}/keydir/#{current_user.name}.pub")
-    @user_keys = { :key => key, :x => 0 }
-    #render 'new'
+    @key = key
   end
 
   def create
-    logger.info params[:key]
-
+    key = params[:key]
+    cmd = "sudo -u '#{ENV['OPLAT_OPLAT_GITOLITE_USER'].shellescape}' #{Rails.root}/scripts/update_user.rb #{current_user.name.shellescape} #{key.shellescape}"
+    r = system( cmd )
+    if r
+      flash[:success] = "Updated the SSH key!"
+      redirect_to root_url
+    else
+      flash.now[:error] = 'Failed'
+      redirect_to new_user_keys_url
+    end
   end
 
 end
