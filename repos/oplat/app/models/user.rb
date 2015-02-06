@@ -29,9 +29,7 @@ class User < ActiveRecord::Base
   end
 
   def create_user
-    cmd = "sudo #{Rails.root}/scripts/create_user.rb #{name.shellescape}"
-    if exec( cmd )
-      return false
-    end
+    cmd = "sudo -u '#{ENV['OPLAT_OPLAT_GITOLITE_USER'].shellescape}' #{Rails.root}/scripts/create_user.rb #{name.shellescape}"
+    system( cmd )
   end
 end
