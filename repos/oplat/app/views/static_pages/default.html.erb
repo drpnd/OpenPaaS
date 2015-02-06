@@ -12,7 +12,7 @@
 
 	<% if signed_in? %>
 	<div class="row">
-		<%= link_to "Manage SSH key", new_repository_path, class: "btn btn-large" %>
+		<%= link_to "Manage SSH key", new_user_keys_path, class: "btn btn-large" %>
     <% if @current_user.repositories.any? %>
       <h3>Your repositories (<%= @current_user.repositories.size %>)</h3>
       <ol class="repositories">
