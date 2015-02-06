@@ -38,7 +38,7 @@ end
 FileUtils.touch(lockfile)
 
 #
-rd = ENV['OPLAT_GITOLITE_REPOSITORY']
+rd = ENV['OPLAT_GIT_REPOSITORY']
 admin = ENV['OPLAT_GITOLITE_USER']
 
 # New configuration
