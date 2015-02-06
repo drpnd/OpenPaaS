@@ -4,8 +4,7 @@ class UserKeysController < ApplicationController
 
   def new
     wd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
-    key = File.read("#{wd}/keydir/#{current_user.name}.pub")
-    @key = key
+    @key = File.read("#{wd}/keydir/#{current_user.name}.pub")
   end
 
   def create
