@@ -38,7 +38,7 @@ end
 FileUtils.touch(lockfile)
 
 #
-rd = ENV['OPLAT_GIT_REPOSITORY']
+rd = ENV['OPLAT_GIT_REPOSITORIES']
 admin = ENV['OPLAT_GITOLITE_USER']
 
 # New configuration
@@ -47,7 +47,8 @@ str = str + "
 repo    #{username}/#{repository}
         RW+     =   #{admin}
         RW      =   #{username}
-        R       =   ins"
+        R       =   ins
+"
 File.write("#{wd}/conf/gitolite.conf", str)
 
 system("git commit -m \"update.\" -a")
