@@ -23,7 +23,9 @@ class Repository < ActiveRecord::Base
 
   private
   def create_repository
-    # ``
+    cmd = "sudo -u '#{ENV['OPLAT_OPLAT_GITOLITE_USER'].shellescape}' #{Rails.root}/scripts/create_repository.rb #{current_user.name.shellescape} #{name.shellescape} #{db_password.shellescape} #{ENV['OPLAT_OPLAT_EXT_DATABASE_NET'].shellescape}"
+    logger.info cmd
+    system( cmd )
   end
 
 end

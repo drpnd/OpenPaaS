@@ -41,15 +41,13 @@ FileUtils.touch(lockfile)
 rd = ENV['OPLAT_OPLAT_GITOLITE_REPOSITORY']
 admin = ENV['OPLAT_OPLAT_GITOLITE_USER']
 
-FileUtils.mkdir_p("#{rd}/#{user_repos}")
-
 # New configuration
 str = File.read("#{wd}/conf/gitolite.conf")
 str = str + "
-repo    $user_repos
+repo    #{username}/#{repos}
         RW+     =   #{admin}
-        RW      =   $username
-        R       =   instance"
+        RW      =   #{username}
+        R       =   ins"
 File.write("#{wd}/conf/gitolite.conf", str)
 
 system("git commit -m \"update.\" -a")
@@ -58,14 +56,14 @@ system("git push")
 
 str = "#!/bin/sh
 ## Username/Repository
-REPOSITORY=\"$user_repos\"
+REPOSITORY=\"#{username}/#{repos}\"
 "
 str0 = File.read("#{Rails.root}/scripts/rails_git_post_update_hook.sh")
 
-File.write("#{rd}/#{user_repos}.git/hook/post-update", str + str0)
+File.write("#{rd}/#{username}/#{repos}.git/hook/post-update", str + str0)
 
-system("chmod +x $rd/$user_repos.git/hooks/post-update")
-system("chown git $rd/$user_repos.git/hooks/post-update")
+system("chmod +x #{rd}/#{username}/#{repos}.git/hooks/post-update")
+system("chown git #{rd}/#{username}/#{repos}.git/hooks/post-update")
 
 # Unlock
 FileUtils.rm(lockfile)
@@ -78,6 +76,7 @@ c = Mysql2::Client.new(:host => ENV['OPLAT_EXT_DATABASE_HOST'],
                        :databsae => "mysql")
 
 c.query("set character set utf8")
+c.query("create database `#{user_repos}` default charset utf8 collate utf8_general_ci")
 c.query("grant all privileges on `#{user_repos}`.* to '#{user_repos}'@'#{db_net}' identified by '#{db_password}'")
 c.close
 
