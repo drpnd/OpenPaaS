@@ -38,7 +38,6 @@ end
 FileUtils.touch(lockfile)
 
 #
-rd = ENV['OPLAT_GIT_REPOSITORIES']
 admin = ENV['OPLAT_GITOLITE_USER']
 
 # New configuration
@@ -53,20 +52,6 @@ File.write("#{wd}/conf/gitolite.conf", str)
 
 system("git commit -m \"update.\" -a")
 system("git push")
-
-
-cd = File.dirname(__FILE__)
-
-str = "#!/bin/sh
-## Username/Repository
-REPOSITORY=\"#{username}/#{repository}\"
-"
-str0 = File.read("#{cd}/rails_git_post_update_hook.sh")
-
-File.write("#{rd}/#{username}/#{repository}.git/hooks/post-update", str + str0)
-
-system("chmod +x #{rd}/#{username}/#{repository}.git/hooks/post-update")
-system("chown git #{rd}/#{username}/#{repository}.git/hooks/post-update")
 
 # Unlock
 FileUtils.rm(lockfile)
