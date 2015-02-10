@@ -40,7 +40,9 @@ cd = File.dirname(__FILE__)
 
 str = "#!/bin/sh
 ## Username/Repository
-REPOSITORY=\"#{username}/#{repository}\"
+export REPOSITORY=\"#{username}/#{repository}\"
+export REPOSITORY_SERVER=\"#{ENV['OPLAT_REPOSITORY_SERVER']}\"
+
 "
 str0 = File.read("#{cd}/rails_git_post_update_hook.sh")
 

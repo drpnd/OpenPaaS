@@ -1,7 +1,7 @@
 #!/bin/sh
 
 export RAILS_ENV=$1
-export MYAPP_DATABASE_PASSWORD=$2
+export DATABASE_PASSWORD=$2
 
 ## The following variables may be moved to arguments of this script.
 REPOS_SERVER=$3

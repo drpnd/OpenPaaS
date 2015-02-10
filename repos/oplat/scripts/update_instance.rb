@@ -15,5 +15,19 @@ end
 
 Instance.where(repository_id: repository.id).find_each do |instance|
   instance.repository_id = nil
-end
 
+  host = Host.find_by(instance.host_id)
+
+  ## Start the instance
+  cmd = "ssh -o StrictHostKeyChecking=no oplat@@#{host.ipaddr.shellescape} lxc-start -n #{instance.name.shellescape}"
+  system( cmd )
+
+  cmd = "ssh -o StrictHostKeyChecking=no oplat@#{instance.ipaddr.shellescape} " +
+    "./OpenPaaS/instances/rails_deploy.sh " +
+    "\"#{ENV['RAILS_ENV'].shellescape}\" " +
+    "\"#{repository.db_password.shellescape}\" " +
+    "\"#{ENV['REPOSITORY_SERVER'].shellescape}\" " +
+    "\"#{user.name.shellescape}\" " +
+    "\"#{repository.name.shellescape}\""
+  system( cmd )
+end
