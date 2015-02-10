@@ -1,4 +1,4 @@
-require "#{File.dirname(__FILE__)}/../../config/environment.rb"
+require "#{File.dirname(__FILE__)}/../config/environment.rb"
 
 repos = ENV['REPOSITORY']
 (user_name, repository_name) = repos.split(/\//)
