@@ -43,7 +43,7 @@ str = "#!/bin/sh
 export REPOSITORY=\"#{username}/#{repository}\"
 export REPOSITORY_SERVER=\"#{ENV['OPLAT_REPOSITORY_SERVER']}\"
 
-export RAILS_ENV=\"#{ENV['RAILS_ENV'].shellescape}\"
+export RAILS_ENV=\"production\"
 export OPLAT_REPOSITORY_SERVER=\"#{ENV['OPLAT_REPOSITORY_SERVER'].shellescape}\"
 export OPLAT_GITOLITE_USER=\"#{ENV['OPLAT_GITOLITE_USER'].shellescape}\"
 export OPLAT_GITOLITE_HOME=\"#{ENV['OPLAT_GITOLITE_HOME'].shellescape}\"
