@@ -49,12 +49,6 @@ export OPLAT_GITOLITE_USER=\"#{ENV['OPLAT_GITOLITE_USER'].shellescape}\"
 export OPLAT_GITOLITE_HOME=\"#{ENV['OPLAT_GITOLITE_HOME'].shellescape}\"
 export OPLAT_GITOLITE_REPOSITORY=\"#{ENV['OPLAT_GITOLITE_REPOSITORY'].shellescape}\"
 export OPLAT_GIT_REPOSITORIES=\"#{ENV['OPLAT_GIT_REPOSITORIES'].shellescape}\"
-export OPLAT_EXT_DATABASE_HOST=\"#{ENV['OPLAT_EXT_DATABASE_HOST'].shellescape}\"
-export OPLAT_EXT_DATABASE_USER=\"#{ENV['OPLAT_EXT_DATABASE_USER'].shellescape}\"
-export OPLAT_EXT_DATABASE_PASSWORD=\"#{ENV['OPLAT_EXT_DATABASE_PASSWORD'].shellescape}\"
-export OPLAT_EXT_DATABASE_NET=\"#{ENV['OPLAT_EXT_DATABASE_NET'].shellescape}\"
-export OPLAT_DATABASE_PASSWORD=\"#{ENV['OPLAT_DATABASE_PASSWORD'].shellescape}\"
-export SECRET_TOKEN=\"#{ENV['SECRET_TOKEN'].shellescape}\"
 
 "
 str0 = File.read("#{cd}/rails_git_post_update_hook.sh")
