@@ -1,12 +1,12 @@
 #!/bin/sh
 
-export RAILS_ENV=$1
-export DATABASE_PASSWORD=$2
-export SECRET_TOKEN=$3
+RAILS_ENV=$1
+DATABASE_PASSWORD=$2
+SECRET_TOKEN=$3
 
 ## The following variable may be moved to arguments of this script.
 REPOS_APPNAME=$4
-export DATABASE_URL=$5
+DATABASE_URL=$5
 
 ## Kill the running instance
 kill `cat rails_instance.pid`

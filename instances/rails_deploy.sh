@@ -1,7 +1,7 @@
 #!/bin/sh
 
-export RAILS_ENV=$1
-export DATABASE_PASSWORD=$2
+RAILS_ENV=$1
+DATABASE_PASSWORD=$2
 
 ## The following variables may be moved to arguments of this script.
 REPOS_SERVER=$3
@@ -14,6 +14,7 @@ kill `cat rails_instance.pid`
 if [ -d $REPOS_APPNAME ]; then
     ## Clone the up-to-date software
     cd $REPOS_APPNAME
+    rm Gemfile.lock
     git pull
 else
     git clone ssh://git@$REPOS_SERVER/$REPOS_USERNAME/$REPOS_APPNAME
