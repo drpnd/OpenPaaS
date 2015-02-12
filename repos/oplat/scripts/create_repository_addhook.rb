@@ -46,7 +46,9 @@ export REPOSITORY_SERVER=\"#{ENV['OPLAT_REPOSITORY_SERVER']}\"
 "
 str0 = File.read("#{cd}/rails_git_post_update_hook.sh")
 
-File.write("#{rd}/#{username}/#{repository}.git/hooks/post-update", str + str0)
+File.open("#{rd}/#{username}/#{repository}.git/hooks/post-update", 'w') {
+  |file| file.write(str + str0)
+}
 
 system("chmod +x #{rd}/#{username}/#{repository}.git/hooks/post-update")
 system("chown git #{rd}/#{username}/#{repository}.git/hooks/post-update")
