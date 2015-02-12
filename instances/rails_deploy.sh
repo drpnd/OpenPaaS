@@ -7,6 +7,7 @@ DATABASE_PASSWORD=$2
 REPOS_SERVER=$3
 REPOS_USERNAME=$4
 REPOS_APPNAME=$5
+DATABASE_URL=$6
 
 ## Kill the running instance
 kill `cat rails_instance.pid`

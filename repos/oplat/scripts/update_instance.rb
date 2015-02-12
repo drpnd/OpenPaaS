@@ -29,7 +29,8 @@ Instance.where(repository_id: repository.id).find_each do |instance|
     "\"#{repository.db_password.shellescape}\" " +
     "\"#{ENV['OPLAT_REPOSITORY_SERVER'].shellescape}\" " +
     "\"#{user.name.shellescape}\" " +
-    "\"#{repository.name.shellescape}\""
+    "\"#{repository.name.shellescape}\" " +
+    "\"#{ENV['OPLAT_USER_DATABASE_URL'].shellescape}\""
   system( cmd )
 
   cmd = "ssh -f -n -o StrictHostKeyChecking=no oplat@#{instance.ipaddr.shellescape} " +
