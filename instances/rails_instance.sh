@@ -8,6 +8,12 @@ SECRET_TOKEN=$3
 REPOS_APPNAME=$4
 DATABASE_URL=$5
 
+export RAILS_ENV
+export DATABASE_PASSWORD
+export SECRET_TOKEN
+export REPOS_APPNAME
+export DATABASE_URL
+
 ## Kill the running instance
 kill `cat rails_instance.pid`
 

@@ -43,16 +43,26 @@ cd = File.dirname(__FILE__)
 
 str = "#!/bin/sh
 ## Username/Repository
-export REPOSITORY=\"#{username}/#{repository}\"
-export REPOSITORY_SERVER=\"#{ENV['OPLAT_REPOSITORY_SERVER']}\"
+REPOSITORY=\"#{username}/#{repository}\"
+REPOSITORY_SERVER=\"#{ENV['OPLAT_REPOSITORY_SERVER']}\"
 
-export RAILS_ENV=\"production\"
-export OPLAT_REPOSITORY_SERVER=\"#{ENV['OPLAT_REPOSITORY_SERVER'].shellescape}\"
-export OPLAT_GITOLITE_USER=\"#{ENV['OPLAT_GITOLITE_USER'].shellescape}\"
-export OPLAT_GITOLITE_HOME=\"#{ENV['OPLAT_GITOLITE_HOME'].shellescape}\"
-export OPLAT_GITOLITE_REPOSITORY=\"#{ENV['OPLAT_GITOLITE_REPOSITORY'].shellescape}\"
-export OPLAT_GIT_REPOSITORIES=\"#{ENV['OPLAT_GIT_REPOSITORIES'].shellescape}\"
-export OPLAT_USER_DATABASE_URL=\"mysql2://#{user_repos.shellescape}:#{URI.escape(db_password, '/').shellescape}@#{ENV['OPLAT_EXT_DATABASE_HOST'].shellescape}/#{user_repos.shellescape}\"
+RAILS_ENV=\"production\"
+OPLAT_REPOSITORY_SERVER=\"#{ENV['OPLAT_REPOSITORY_SERVER'].shellescape}\"
+OPLAT_GITOLITE_USER=\"#{ENV['OPLAT_GITOLITE_USER'].shellescape}\"
+OPLAT_GITOLITE_HOME=\"#{ENV['OPLAT_GITOLITE_HOME'].shellescape}\"
+OPLAT_GITOLITE_REPOSITORY=\"#{ENV['OPLAT_GITOLITE_REPOSITORY'].shellescape}\"
+OPLAT_GIT_REPOSITORIES=\"#{ENV['OPLAT_GIT_REPOSITORIES'].shellescape}\"
+OPLAT_USER_DATABASE_URL=\"mysql2://#{user_repos.shellescape}:#{URI.escape(db_password, '/').shellescape}@#{ENV['OPLAT_EXT_DATABASE_HOST'].shellescape}/#{user_repos.shellescape}\"
+
+export REPOSITORY
+export REPOSITORY_SERVER
+export RAILS_ENV
+export OPLAT_REPOSITORY_SERVER
+export OPLAT_GITOLITE_USER
+export OPLAT_GITOLITE_HOME
+export OPLAT_GITOLITE_REPOSITORY
+export OPLAT_GIT_REPOSITORIES
+export OPLAT_USER_DATABASE_URL
 
 "
 str0 = File.read("#{cd}/rails_git_post_update_hook.sh")
