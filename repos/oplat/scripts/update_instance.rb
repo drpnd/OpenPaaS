@@ -38,6 +38,6 @@ Instance.where(repository_id: repository.id).find_each do |instance|
     "\"#{repository.db_password.shellescape}\" " +
     "\"#{repository.secret_token.shellescape}\" " +
     "\"#{repository.name.shellescape}\" " +
-    "\"#{ENV['DATABASE_URL'].shellescape}\""
+    "\"#{ENV['OPLAT_USER_DATABASE_URL'].shellescape}\""
   system( cmd )
 end
