@@ -4,13 +4,15 @@ require 'mysql2'
 require 'fileutils'
 require 'shellwords'
 
-if ARGV.size < 2
+if ARGV.size < 3
   $stderr.puts "#{$0} user repository password net"
   exit 1
 end
 
 username = ARGV[0]
 repository = ARGV[1]
+db_password = ARGV[2]
+user_repos = Shellwords.escape("#{username}_#{repository}")
 
 # Check the argument
 if username.empty?
@@ -49,6 +51,7 @@ export OPLAT_GITOLITE_USER=\"#{ENV['OPLAT_GITOLITE_USER'].shellescape}\"
 export OPLAT_GITOLITE_HOME=\"#{ENV['OPLAT_GITOLITE_HOME'].shellescape}\"
 export OPLAT_GITOLITE_REPOSITORY=\"#{ENV['OPLAT_GITOLITE_REPOSITORY'].shellescape}\"
 export OPLAT_GIT_REPOSITORIES=\"#{ENV['OPLAT_GIT_REPOSITORIES'].shellescape}\"
+export DATABASE_URL=\"mysql2://#{user_repos.shellescape}:#{db_password.shellescape}@#{ENV['OPLAT_EXT_DATABASE_HOST'].shellescape}/somedatabase\"
 
 "
 str0 = File.read("#{cd}/rails_git_post_update_hook.sh")

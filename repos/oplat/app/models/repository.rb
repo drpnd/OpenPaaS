@@ -29,7 +29,7 @@ class Repository < ActiveRecord::Base
     cmd = "sudo -u '#{ENV['OPLAT_GITOLITE_USER'].shellescape}' #{Rails.root}/scripts/create_repository.rb #{user.name.shellescape} #{name.shellescape} #{db_password.shellescape} #{ENV['OPLAT_EXT_DATABASE_NET'].shellescape}"
     logger.info cmd
     system( cmd )
-    cmd = "sudo -u 'git' #{Rails.root}/scripts/create_repository_addhook.rb #{user.name.shellescape} #{name.shellescape}"
+    cmd = "sudo -u 'git' #{Rails.root}/scripts/create_repository_addhook.rb #{user.name.shellescape} #{name.shellescape} #{db_password.shellescape}"
     logger.info cmd
     system( cmd )
     return true
