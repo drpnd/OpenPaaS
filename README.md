@@ -18,3 +18,7 @@ Hirochika Asai
 - Dependencies
  - Ruby (Rails)
  - gitolite
+
+
+Currently, there is a security issue that discloses password in the process arguments.
+Let us discuss new design...
