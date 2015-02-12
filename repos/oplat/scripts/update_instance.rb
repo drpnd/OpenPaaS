@@ -32,7 +32,7 @@ Instance.where(repository_id: repository.id).find_each do |instance|
     "\"#{repository.name.shellescape}\""
   system( cmd )
 
-  cmd = "ssh -o StrictHostKeyChecking=no oplat@#{instance.ipaddr.shellescape} " +
+  cmd = "ssh -f -n -o StrictHostKeyChecking=no oplat@#{instance.ipaddr.shellescape} " +
     "./OpenPaaS/instances/rails_instance.sh " +
     "\"#{ENV['RAILS_ENV'].shellescape}\" " +
     "\"#{repository.db_password.shellescape}\" " +

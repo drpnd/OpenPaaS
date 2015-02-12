@@ -24,4 +24,6 @@ do
 done
 echo "}" >> $fname
 
+ln -s $fname /etc/nginx/sites-enabled/$target
+
 service nginx reload
