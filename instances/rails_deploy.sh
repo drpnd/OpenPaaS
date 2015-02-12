@@ -10,7 +10,7 @@ REPOS_APPNAME=$5
 DATABASE_URL=$6
 
 ## Kill the running instance
-kill `cat rails_instance.pid`
+kill -9 `cat rails_instance.pid`
 
 if [ -d $REPOS_APPNAME ]; then
     ## Clone the up-to-date software
