@@ -6,6 +6,7 @@ then
 	exit
 fi
 
-rails runner /var/www/OpenPaaS/repos/oplat/scripts/update_instance.rb
+cd /var/www/OpenPaaS/repos/oplat
+rails runner ./scripts/update_instance.rb
 
 exit 0
