@@ -3,6 +3,7 @@
 require 'mysql2'
 require 'fileutils'
 require 'shellwords'
+require 'uri'
 
 if ARGV.size < 3
   $stderr.puts "#{$0} user repository password net"
