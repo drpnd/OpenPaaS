@@ -11,13 +11,15 @@ REPOS_APPNAME=$5
 ## Kill the running instance
 kill `cat rails_instance.pid`
 
-## Remove the old software
-rm -rf $REPOS_APPNAME
-
-## Clone the up-to-date software
-git clone ssh://git@$REPOS_SERVER/$REPOS_USERNAME/$REPOS_APPNAME
+if [ -d $REPOS_APPNAME ]; then
+    ## Clone the up-to-date software
+    cd $REPOS_APPNAME
+    git pull
+else
+    git clone ssh://git@$REPOS_SERVER/$REPOS_USERNAME/$REPOS_APPNAME
+    cd $REPOS_APPNAME
+fi
 
 ## Execute bundle install and DB migration
-cd $REPOS_APPNAME
 bundle install --path vendor/bundle
 bundle exec rake db:migrate
