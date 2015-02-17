@@ -46,6 +46,6 @@ Instance.where(repository_id: repository.id).find_each do |instance|
   addrs += " #{instance.ipaddr.shellescape}"
 end
 
-cmd = "ssh -o StrictHostKeyChecking=no oplat@#{OPLAT_HTTP_LB} " +
-  "sudo /opt/nginx_autoconfig.sh #{repository.name.shellescape}.#{user.name.shellescape}.#{OPLAT_HTTP_LB_SUFFIX} #{addrs}"
+cmd = "ssh -o StrictHostKeyChecking=no oplat@#{ENV['OPLAT_HTTP_LB']} " +
+  "sudo /opt/nginx_autoconfig.sh #{repository.name.shellescape}.#{user.name.shellescape}.#{ENV['OPLAT_HTTP_LB_SUFFIX']} #{addrs}"
 system( cmd )
