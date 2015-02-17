@@ -40,13 +40,17 @@ Instance.where(repository_id: repository.id).find_each do |instance|
     "\"#{repository.db_password.shellescape}\" " +
     "\"#{repository.secret_token.shellescape}\" " +
     "\"#{repository.name.shellescape}\" " +
-    "\"#{ENV['OPLAT_USER_DATABASE_URL'].shellescape}\""
+    "\"#{ENV['OPLAT_USER_DATABASE_URL'].shellescape}\" > /dev/null 2>&1"
   system( cmd )
+  # job1 = fork do
+  #   exec cmd
+  # end
+  # Process.detach(job1)
 
   addrs += " #{instance.ipaddr.shellescape}"
 end
 
-cmd = "ssh -o StrictHostKeyChecking=no oplat@#{ENV['OPLAT_HTTP_LB']} " +
+cmd = "ssh -f -n -o StrictHostKeyChecking=no oplat@#{ENV['OPLAT_HTTP_LB']} " +
   "sudo /opt/nginx_autoconfig.sh #{repository.name.shellescape}.#{user.name.shellescape}.#{ENV['OPLAT_HTTP_LB_SUFFIX']} #{addrs}"
 system( cmd )
 
