@@ -13,6 +13,7 @@ unless repository
   exit 1
 end
 
+addrs = ""
 Instance.where(repository_id: repository.id).find_each do |instance|
   instance.repository_id = nil
 
@@ -41,4 +42,10 @@ Instance.where(repository_id: repository.id).find_each do |instance|
     "\"#{repository.name.shellescape}\" " +
     "\"#{ENV['OPLAT_USER_DATABASE_URL'].shellescape}\""
   system( cmd )
+
+  addrs += " #{instance.ipaddr.shellescape}"
 end
+
+cmd = "ssh -o StrictHostKeyChecking=no oplat@#{OPLAT_HTTP_LB} " +
+  "sudo /opt/nginx_autoconfig.sh #{repository.name.shellescape}.#{user.name.shellescape}.#{OPLAT_HTTP_LB_SUFFIX} #{addrs}"
+system( cmd )
