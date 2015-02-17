@@ -13,11 +13,11 @@ echo "server {
         listen 80;
         server_name $target;
         location / {
-                proxy_pass  http://lxcpaas;
+                proxy_pass  http://lxc.$target;
                 include /etc/nginx/proxy_params;
         }
 }
-upstream lxcpaas {" > $fname
+upstream lxc.$target {" > $fname
 for s in `echo "$servers"`;
 do
 	echo "        server $s:3000;" >> $fname
