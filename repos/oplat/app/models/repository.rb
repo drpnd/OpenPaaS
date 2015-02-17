@@ -11,7 +11,8 @@ class Repository < ActiveRecord::Base
 
   before_create {|repository|
     repository.secret_token = SecureRandom.hex(64)
-    repository.db_password = SecureRandom.base64(15)}
+    #repository.db_password = SecureRandom.base64(15)}
+    repository.db_password = SecureRandom.hex(12)}
 
   before_create :create_repository
   after_create :create_instance
