@@ -3,7 +3,7 @@ class Repository < ActiveRecord::Base
   has_many :instance
 
   validates :name, length: { minimum: 3, maximum: 40 },
-  format: { with: /\A[A-Za-z0-9]+\z/ }, :uniqueness => {:scope => :user_id}
+  format: { with: /\A[a-z0-9]+\z/ }, :uniqueness => {:scope => :user_id}
   #validate :user_repository_uniqueness
   #uniqueness: { case_sensitive: false }
   validates :user_id, presence: true
