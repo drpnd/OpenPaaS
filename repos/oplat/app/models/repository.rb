@@ -14,6 +14,7 @@ class Repository < ActiveRecord::Base
     repository.db_password = SecureRandom.base64(15)}
 
   before_create :create_repository
+  after_create :create_instance
 
   def user_repository_uniqueness
     existing_record = Repository.find(:first, :conditions => ["user_id = ? AND name = ?", user_id, name])
@@ -30,7 +31,6 @@ class Repository < ActiveRecord::Base
     unless instance
       return false
     end
-    instance.repository_id = id
 
     uesr = User.find_by(id: user_id)
     cmd = "sudo -u '#{ENV['OPLAT_GITOLITE_USER'].shellescape}' #{Rails.root}/scripts/create_repository.rb #{user.name.shellescape} #{name.shellescape} #{db_password.shellescape} #{ENV['OPLAT_EXT_DATABASE_NET'].shellescape}"
@@ -40,6 +40,12 @@ class Repository < ActiveRecord::Base
     logger.info cmd
     system( cmd )
     return true
+  end
+  def create_instance
+    instance = Instance.find_by(repository_id: nil)
+    instance.repository_id = id
+    instance.save()
+    logger.info "Save"
   end
 
 end
