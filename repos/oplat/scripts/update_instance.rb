@@ -49,3 +49,5 @@ end
 cmd = "ssh -o StrictHostKeyChecking=no oplat@#{ENV['OPLAT_HTTP_LB']} " +
   "sudo /opt/nginx_autoconfig.sh #{repository.name.shellescape}.#{user.name.shellescape}.#{ENV['OPLAT_HTTP_LB_SUFFIX']} #{addrs}"
 system( cmd )
+
+exit 0
