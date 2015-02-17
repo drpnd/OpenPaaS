@@ -25,6 +25,13 @@ class Repository < ActiveRecord::Base
   private
   def create_repository
     logger.info "Creating a repository"
+
+    instance = Instance.find_by(repository_id: nil)
+    unless instance
+      return false
+    end
+    instance.repository_id = id
+
     uesr = User.find_by(id: user_id)
     cmd = "sudo -u '#{ENV['OPLAT_GITOLITE_USER'].shellescape}' #{Rails.root}/scripts/create_repository.rb #{user.name.shellescape} #{name.shellescape} #{db_password.shellescape} #{ENV['OPLAT_EXT_DATABASE_NET'].shellescape}"
     logger.info cmd
