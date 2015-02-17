@@ -6,7 +6,8 @@ fname="/etc/nginx/sites-available/$target"
 
 if [ ! -f "$fname" ];
 then
-	exit 1
+	echo "creating"
+	#exit 1
 fi
 
 echo "server {
