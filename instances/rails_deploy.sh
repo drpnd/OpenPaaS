@@ -31,4 +31,5 @@ fi
 
 ## Execute bundle install and DB migration
 bundle install --path vendor/bundle
-DATABASE_URL=$DATABASE_URL bundle exec rake db:migrate
+bundle exec rake assets:precompile
+bundle exec rake db:migrate
