@@ -2,7 +2,7 @@ class Repository < ActiveRecord::Base
   belongs_to :user
   has_many :instance
 
-  validates :name, length: { minimum: 3, maximum: 40 },
+  validates :name, length: { minimum: 3, maximum: 8 },
   format: { with: /\A[a-z0-9]+\z/ }, :uniqueness => {:scope => :user_id}
   #validate :user_repository_uniqueness
   #uniqueness: { case_sensitive: false }
